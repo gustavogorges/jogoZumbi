@@ -24,4 +24,6 @@ public class Batedor extends Soldado {
 
         alvo.setVida(vidaAlvo - danoSkill);
     }
+
+
 }

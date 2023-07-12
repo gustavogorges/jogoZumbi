@@ -24,6 +24,9 @@ public class Main {
 
     public static void Jogar() {
         Fases.fase1();
+        if(Fases.fase1Concluida) {
+            Fases.fase2();
+        }
     }
 
     public static void VerPelotao() {

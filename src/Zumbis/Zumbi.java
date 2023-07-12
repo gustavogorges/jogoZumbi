@@ -38,6 +38,9 @@ public abstract class Zumbi {
     }
 
     public boolean isVivo() {
-        return vivo;
+        if(this.getVida() <= 0) {
+            return false;
+        }
+        return true;
     }
 }

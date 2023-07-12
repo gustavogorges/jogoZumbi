@@ -41,7 +41,10 @@ public abstract class Soldado {
     }
 
     public boolean isVivo() {
-        return vivo;
+        if(this.getVida() <= 0) {
+            return false;
+        }
+        return true;
     }
 
     public boolean isSkillBoolean() {

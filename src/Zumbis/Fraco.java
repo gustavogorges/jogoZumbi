@@ -11,10 +11,9 @@ public class Fraco extends Zumbi {
     @Override
     public void bater(Soldado alvo) {
         if (alvo.isVivo()) {
-            int vidaAlvo = alvo.getVida();
-            int danoZumbi = this.getVida();
+            int danoZumbi = this.getDano();
 
-            alvo.setVida(vidaAlvo - danoZumbi);
+            alvo.setVida(alvo.getVida() - danoZumbi);
         }
     }
 }
