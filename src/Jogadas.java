@@ -9,7 +9,7 @@ public class Jogadas {
     static Scanner sc = new Scanner(System.in);
 
 
-    public static void jogadaAssalto(int opcao) {
+    public static void jogadaAssalto(int opcao, int faseAtual) {
         Soldado soldado = Fases.pelotao.get(0);
         System.out.println("""
                 Digite qual função você deseja utilizar : 
@@ -19,21 +19,40 @@ public class Jogadas {
         int func = sc.nextInt();
 
         if(func == 1) {
-            Zumbi zumbiEscolhido = zumbiEscolhido();
-            soldado.atirar(soldado, zumbiEscolhido);
+            if(faseAtual == 1) {
+                Zumbi zumbiEscolhido = zumbiEscolhido1();
+                soldado.atirar(soldado, zumbiEscolhido);
+            } else if (faseAtual == 2) {
+                Zumbi zumbiEscolhido = zumbiEscolhido2();
+                soldado.atirar(soldado, zumbiEscolhido);
+            } else if( faseAtual == 3) {
+                Zumbi zumbiEscolhido = zumbiEscolhido3();
+                soldado.atirar(soldado, zumbiEscolhido);
+            }
           }
         else if (func == 2) {
             if (soldado.isSkillBoolean()) {
-                Zumbi zumbiEscolhido = zumbiEscolhido();
-                zumbiEscolhido.setVida(zumbiEscolhido.getVida() - soldado.getSkill());
-                soldado.setSkillBoolean(false);
+                if(faseAtual == 1) {
+                    Zumbi zumbiEscolhido = zumbiEscolhido1();
+                    zumbiEscolhido.setVida(zumbiEscolhido.getVida() - soldado.getSkill());
+                    soldado.setSkillBoolean(false);
+                } else if (faseAtual == 2) {
+                    Zumbi zumbiEscolhido = zumbiEscolhido2();
+                    zumbiEscolhido.setVida(zumbiEscolhido.getVida() - soldado.getSkill());
+                    soldado.setSkillBoolean(false);
+                } else if( faseAtual == 3) {
+                    Zumbi zumbiEscolhido = zumbiEscolhido3();
+                    zumbiEscolhido.setVida(zumbiEscolhido.getVida() - soldado.getSkill());
+                    soldado.setSkillBoolean(false);
+                }
+
             } else {
                 System.out.println("\n Este soldado ja utilizou sua skill. Você Perdeu a Vez \n");
             }
         }
     }
 
-    public static void jogadaBatedor(int opcao) {
+    public static void jogadaBatedor(int opcao, int faseAtual) {
         Soldado soldado = Fases.pelotao.get(3);
         System.out.println("""
                 Digite qual função você deseja utilizar : 
@@ -43,21 +62,39 @@ public class Jogadas {
         int func = sc.nextInt();
 
         if(func == 1) {
-            Zumbi zumbiEscolhido = zumbiEscolhido();
-            soldado.atirar(soldado, zumbiEscolhido);
+            if(faseAtual == 1) {
+                Zumbi zumbiEscolhido = zumbiEscolhido1();
+                soldado.atirar(soldado, zumbiEscolhido);
+            } else if (faseAtual == 2) {
+                Zumbi zumbiEscolhido = zumbiEscolhido2();
+                soldado.atirar(soldado, zumbiEscolhido);
+            } else if( faseAtual == 3) {
+                Zumbi zumbiEscolhido = zumbiEscolhido3();
+                soldado.atirar(soldado, zumbiEscolhido);
+            }
         }
         else if (func == 2) {
             if (soldado.isSkillBoolean()) {
-                Zumbi zumbiEscolhido = zumbiEscolhido();
-                zumbiEscolhido.setVida(zumbiEscolhido.getVida() - soldado.getSkill());
-                soldado.setSkillBoolean(false);
+                if(faseAtual == 1) {
+                    Zumbi zumbiEscolhido = zumbiEscolhido1();
+                    zumbiEscolhido.setVida(zumbiEscolhido.getVida() - soldado.getSkill());
+                    soldado.setSkillBoolean(false);
+                } else if (faseAtual == 2) {
+                    Zumbi zumbiEscolhido = zumbiEscolhido2();
+                    zumbiEscolhido.setVida(zumbiEscolhido.getVida() - soldado.getSkill());
+                    soldado.setSkillBoolean(false);
+                } else if( faseAtual == 3) {
+                    Zumbi zumbiEscolhido = zumbiEscolhido3();
+                    zumbiEscolhido.setVida(zumbiEscolhido.getVida() - soldado.getSkill());
+                    soldado.setSkillBoolean(false);
+                }
             } else {
                 System.out.println("\n Este soldado ja utilizou sua skill. Você Perdeu a Vez \n");
             }
         }
     }
 
-    public static void jogadaMedico(int opcao) {
+    public static void jogadaMedico(int opcao, int faseAtual) {
         Soldado soldado = Fases.pelotao.get(2);
         System.out.println("""
                 Digite qual função você deseja utilizar : 
@@ -67,8 +104,16 @@ public class Jogadas {
         int func = sc.nextInt();
 
         if(func == 1) {
-            Zumbi zumbiEscolhido = zumbiEscolhido();
-            soldado.atirar(soldado, zumbiEscolhido);
+            if(faseAtual == 1) {
+                Zumbi zumbiEscolhido = zumbiEscolhido1();
+                soldado.atirar(soldado, zumbiEscolhido);
+            } else if (faseAtual == 2) {
+                Zumbi zumbiEscolhido = zumbiEscolhido2();
+                soldado.atirar(soldado, zumbiEscolhido);
+            } else if( faseAtual == 3) {
+                Zumbi zumbiEscolhido = zumbiEscolhido3();
+                soldado.atirar(soldado, zumbiEscolhido);
+            }
         }
         else if (func == 2) {
             if(soldado.isSkillBoolean()) {
@@ -83,7 +128,7 @@ public class Jogadas {
         }
     }
 
-    public static void jogadaSuporte(int opcao) {
+    public static void jogadaSuporte(int opcao, int faseAtual) {
         Soldado soldado = Fases.pelotao.get(1);
         System.out.println("""
                 Digite qual função você deseja utilizar : 
@@ -93,8 +138,16 @@ public class Jogadas {
         int func = sc.nextInt();
 
         if(func == 1) {
-            Zumbi zumbiEscolhido = zumbiEscolhido();
-            soldado.atirar(soldado, zumbiEscolhido);
+            if(faseAtual == 1) {
+                Zumbi zumbiEscolhido = zumbiEscolhido1();
+                soldado.atirar(soldado, zumbiEscolhido);
+            } else if (faseAtual == 2) {
+                Zumbi zumbiEscolhido = zumbiEscolhido2();
+                soldado.atirar(soldado, zumbiEscolhido);
+            } else if( faseAtual == 3) {
+                Zumbi zumbiEscolhido = zumbiEscolhido3();
+                soldado.atirar(soldado, zumbiEscolhido);
+            }
         }
         else if (func == 2) {
             Soldado soldadoEscolha = soldadoEscolha();
@@ -115,16 +168,55 @@ public class Jogadas {
         }
     }
 
-    public static Zumbi zumbiEscolhido() {
+    public static Zumbi zumbiEscolhido1() {
         int cont = 1;
         System.out.println("Digite qual seu alvo: ");
         for (Zumbi zumbiFor: Fases.grupo1) {
-            System.out.println(cont+"\n - classe : "+zumbiFor.getClasse()+"\n - vida : "+ zumbiFor.getVida());
-            cont++;
+            if(zumbiFor.isVivo()) {
+                System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - vida : " + zumbiFor.getVida());
+                cont++;
+            } else {
+                System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - ZUMBI MORTO ");
+                cont++;
+            }
         }
         int escolha = sc.nextInt();
 
         return Fases.grupo1.get(escolha - 1);
+    }
+
+    public static Zumbi zumbiEscolhido2() {
+        int cont = 1;
+        System.out.println("Digite qual seu alvo: ");
+        for (Zumbi zumbiFor: Fases.grupo2) {
+            if(zumbiFor.isVivo()) {
+                System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - vida : " + zumbiFor.getVida());
+                cont++;
+            } else {
+                System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - ZUMBI MORTO ");
+                cont++;
+            }
+        }
+        int escolha = sc.nextInt();
+
+        return Fases.grupo2.get(escolha - 1);
+    }
+
+    public static Zumbi zumbiEscolhido3() {
+        int cont = 1;
+        System.out.println("Digite qual seu alvo: ");
+        for (Zumbi zumbiFor: Fases.grupo3) {
+            if(zumbiFor.isVivo()) {
+                System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - vida : " + zumbiFor.getVida());
+                cont++;
+            } else {
+                System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - ZUMBI MORTO ");
+                cont++;
+            }
+        }
+        int escolha = sc.nextInt();
+
+        return Fases.grupo3.get(escolha - 1);
     }
 
     public static Soldado soldadoEscolha() {

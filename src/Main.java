@@ -23,9 +23,15 @@ public class Main {
     }
 
     public static void Jogar() {
+        System.out.println("// FASE 1 //");
         Fases.fase1();
         if(Fases.fase1Concluida) {
+            System.out.println("// FASE 2 //");
             Fases.fase2();
+            if(Fases.fase2Concluida) {
+                System.out.println("// FASE 3 //");
+                Fases.fase3();
+            }
         }
     }
 
