@@ -1,8 +1,4 @@
-import Pelotao.Assalto;
-import Pelotao.Suporte;
-import Pelotao.Medico;
-import Pelotao.Batedor;
-import Pelotao.Soldado;
+import Pelotao.*;
 import Zumbis.Forte;
 import Zumbis.Fraco;
 import Zumbis.Normal;
@@ -25,15 +21,7 @@ public class Fases {
     static int faseAtual;
 
     public static void fase1()  {
-        Soldado assalto = new Assalto("assalto",120,60,100,true,true);
-        pelotao.add(assalto);
-        Soldado suporte = new Suporte("suporte",140,75,1,true,true);
-        pelotao.add(suporte);
-        Soldado medico = new Medico("medico",110,55,60,true,true);
-        pelotao.add(medico);
-        Soldado batedor = new Batedor("batedor",110,100,150,true,true);
-        pelotao.add(batedor);
-
+        Pelotao.novoPelotao();
         Zumbi zumbiFraco11 = new Fraco("fraco",50,20,true);
         grupo1.add(zumbiFraco11);
         Zumbi zumbiFraco12 = new Fraco("fraco",50,20,true);
@@ -87,10 +75,15 @@ public class Fases {
 
     public static void fase3()  {
         Zumbi zumbiForte31 = new Forte("forte",150,60,true);
+        grupo3.add(zumbiForte31);
         Zumbi zumbiForte32 = new Forte("forte",150,60,true);
+        grupo3.add(zumbiForte32);
         Zumbi zumbiForte33 = new Forte("forte",150,60,true);
+        grupo3.add(zumbiForte33);
         Zumbi zumbiForte34 = new Forte("forte",150,60,true);
+        grupo3.add(zumbiForte34);
         Zumbi zumbiForte35 = new Forte("forte",150,60,true);
+        grupo3.add(zumbiForte35);
 
         do {
             statusPelotao();
@@ -171,23 +164,8 @@ public class Fases {
 
     }
 
-    public static void rodadaZumbi1() {
-        // ZUMBI ALEATÓRIO
-        Zumbi zumbiRandom = zumbiRandom1();
-
-        Soldado soldadoRandom = soldadoRandom();
-
-        if (soldadoRandom.isVivo() && zumbiRandom.isVivo()) {
-            zumbiRandom.bater(soldadoRandom);
-            System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
-        } else if (!soldadoRandom.isVivo() || !zumbiRandom.isVivo()) {
-            System.out.println("Você deu sorte, o zumbi errou o ataque!");
-        }
-    }
-
     public static Zumbi zumbiRandom1() {
-        double randomZumbiNumber;
-        randomZumbiNumber = Math.random() * 4;
+        double randomZumbiNumber = Math.random() * grupo1.size();
         int truncadoZumbi = (int)randomZumbiNumber;
 
         return grupo1.get(truncadoZumbi);
@@ -195,7 +173,7 @@ public class Fases {
 
     public static Zumbi zumbiRandom2() {
         double randomZumbiNumber;
-        randomZumbiNumber = Math.random() * 4;
+        randomZumbiNumber = Math.random() * grupo2.size();
         int truncadoZumbi = (int)randomZumbiNumber;
 
         return grupo2.get(truncadoZumbi);
@@ -203,7 +181,7 @@ public class Fases {
 
     public static Zumbi zumbiRandom3() {
         double randomZumbiNumber;
-        randomZumbiNumber = Math.random() * 4;
+        randomZumbiNumber = Math.random() * grupo3.size();
         int truncadoZumbi = (int)randomZumbiNumber;
 
         return grupo3.get(truncadoZumbi);
@@ -211,10 +189,21 @@ public class Fases {
 
     public static Soldado soldadoRandom() {
         double randomSoldadoNumber;
-        randomSoldadoNumber = Math.random() * 4;
+        randomSoldadoNumber = Math.random() * pelotao.size();
         int truncadoSoldado = (int)randomSoldadoNumber;
 
         return pelotao.get(truncadoSoldado);
+    }
+
+    public static void rodadaZumbi1() {
+        // ZUMBI ALEATÓRIO
+        Zumbi zumbiRandom = zumbiRandom1();
+
+        Soldado soldadoRandom = soldadoRandom();
+
+        zumbiRandom.bater(soldadoRandom);
+        System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
+
     }
 
     public static void rodadaZumbi2() {
@@ -222,12 +211,8 @@ public class Fases {
 
         Soldado soldadoRandom = soldadoRandom();
 
-        if (soldadoRandom.isVivo()) {
-            zumbiRandom.bater(soldadoRandom);
-            System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
-        } else if (!soldadoRandom.isVivo()) {
-            System.out.println("Você deu sorte, o zumbi errou o ataque!");
-        }
+        zumbiRandom.bater(soldadoRandom);
+        System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
     }
 
     public static void rodadaZumbi3() {
@@ -235,12 +220,8 @@ public class Fases {
 
         Soldado soldadoRandom = soldadoRandom();
 
-        if (soldadoRandom.isVivo()) {
-            zumbiRandom.bater(soldadoRandom);
-            System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
-        } else if (!soldadoRandom.isVivo()) {
-            System.out.println("Você deu sorte, o zumbi errou o ataque!");
-        }
+        zumbiRandom.bater(soldadoRandom);
+        System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
     }
 
     public static boolean pelotaoVivo() {

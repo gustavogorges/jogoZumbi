@@ -13,7 +13,5 @@ public class Pelotao {
         pelotao.add(medico);
         Soldado batedor = new Batedor("batedor",90,100,999,true,true);
         pelotao.add(batedor);
-
-
     }
 }

@@ -40,7 +40,7 @@ public class Main {
     public static void ExplicacaoPelotao() {
         System.out.println("""
                 Explicação de Skills de cada soldado
-                1- Assalto, possui uma granada na qual da 70 de dano em zumbis atingidos
+                1- Assalto, possui uma granada na qual desfere 70 de dano em zumbis atingidos
                 2- Suporte, possui a habilidade de recuperar qualquer skill do pelotão que ja tenha sido utilizada
                 3- Medico, possui a habilidade de recuperar 60 de vida de seus colegas
                 4- Batedor, possui um único tiro de sniper que é hitkill em qualquer zumbi
