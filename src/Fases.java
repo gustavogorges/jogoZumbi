@@ -25,13 +25,13 @@ public class Fases {
     static int faseAtual;
 
     public static void fase1()  {
-        Soldado assalto = new Assalto("assalto",100,45,60,true,true);
+        Soldado assalto = new Assalto("assalto",120,60,100,true,true);
         pelotao.add(assalto);
-        Soldado suporte = new Suporte("suporte",110,25,1,true,true);
+        Soldado suporte = new Suporte("suporte",140,75,1,true,true);
         pelotao.add(suporte);
-        Soldado medico = new Medico("medico",90,30,60,true,true);
+        Soldado medico = new Medico("medico",110,55,60,true,true);
         pelotao.add(medico);
-        Soldado batedor = new Batedor("batedor",90,100,999,true,true);
+        Soldado batedor = new Batedor("batedor",110,100,150,true,true);
         pelotao.add(batedor);
 
         Zumbi zumbiFraco11 = new Fraco("fraco",50,20,true);
@@ -48,7 +48,9 @@ public class Fases {
         do {
             statusPelotao();
             escolhaJogadorRodada();
-            rodadaZumbi1();
+            if(zumbisVivo1()) {
+                rodadaZumbi1();
+            }
         } while (zumbisVivo1());
         if(pelotaoVivo() && !zumbisVivo1()) {
             System.out.println("Parabens o seu pelotão passou da primeira fase!");
@@ -71,12 +73,12 @@ public class Fases {
         do {
             statusPelotao();
             escolhaJogadorRodada();
-            if(!fase2Concluida) {
+            if(zumbisVivo2()) {
                 rodadaZumbi2();
             }
         } while (zumbisVivo2());
         if(pelotaoVivo() && !zumbisVivo2()) {
-            System.out.println("Parabens o seu pelotão passou da primeira fase!");
+            System.out.println("Parabens o seu pelotão passou da segunda fase!");
             fase2Concluida = true;
         } else if(!pelotaoVivo() && zumbisVivo2()) {
             System.out.println("Seu pelotão morreu na segunda fase!");
@@ -93,15 +95,16 @@ public class Fases {
         do {
             statusPelotao();
             escolhaJogadorRodada();
-            if(!fase3Concluida) {
+            if(zumbisVivo3()) {
                 rodadaZumbi3();
             }
         } while (zumbisVivo3());
         if(pelotaoVivo() && !zumbisVivo3()) {
             System.out.println("Parabens o seu pelotão zerou o game!");
+            Main.fimJogo = true;
             fase3Concluida = true;
         } else if(!pelotaoVivo() && zumbisVivo3()) {
-            System.out.println("Seu pelotão morreu na terceira fase!");
+            System.out.println("Seu pelotão morreu na terceira e última fase!");
         }
     }
 
@@ -128,10 +131,9 @@ public class Fases {
             faseAtual = 1;
         }
         if(!pelotaoVivo()) {
-            System.out.println("Você perdeu!");
+            System.out.println("Você perdeu! O seu pelotão inteiro morreu!");
             System.exit(0);
         }
-        Soldado atual;
         System.out.println("""
                 Qual Soldado você deseja utilizar, nesta rodada ?
                 1- Assalto
@@ -170,45 +172,75 @@ public class Fases {
     }
 
     public static void rodadaZumbi1() {
-        double randomZumbiNumber, randomSoldadoNumber;
+        // ZUMBI ALEATÓRIO
+        Zumbi zumbiRandom = zumbiRandom1();
+
+        Soldado soldadoRandom = soldadoRandom();
+
+        if (soldadoRandom.isVivo() && zumbiRandom.isVivo()) {
+            zumbiRandom.bater(soldadoRandom);
+            System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
+        } else if (!soldadoRandom.isVivo() || !zumbiRandom.isVivo()) {
+            System.out.println("Você deu sorte, o zumbi errou o ataque!");
+        }
+    }
+
+    public static Zumbi zumbiRandom1() {
+        double randomZumbiNumber;
         randomZumbiNumber = Math.random() * 4;
-        randomSoldadoNumber = Math.random() * 4;
         int truncadoZumbi = (int)randomZumbiNumber;
+
+        return grupo1.get(truncadoZumbi);
+    }
+
+    public static Zumbi zumbiRandom2() {
+        double randomZumbiNumber;
+        randomZumbiNumber = Math.random() * 4;
+        int truncadoZumbi = (int)randomZumbiNumber;
+
+        return grupo2.get(truncadoZumbi);
+    }
+
+    public static Zumbi zumbiRandom3() {
+        double randomZumbiNumber;
+        randomZumbiNumber = Math.random() * 4;
+        int truncadoZumbi = (int)randomZumbiNumber;
+
+        return grupo3.get(truncadoZumbi);
+    }
+
+    public static Soldado soldadoRandom() {
+        double randomSoldadoNumber;
+        randomSoldadoNumber = Math.random() * 4;
         int truncadoSoldado = (int)randomSoldadoNumber;
 
-        Zumbi zumbiRandom = grupo1.get(truncadoZumbi);
-        Soldado jogadorRandom = pelotao.get(truncadoSoldado);
-
-        zumbiRandom.bater(jogadorRandom);
-        System.out.println("Zumbi "+zumbiRandom.getClasse()+" bateu em Soldado "+ jogadorRandom.getClasse());
+        return pelotao.get(truncadoSoldado);
     }
 
     public static void rodadaZumbi2() {
-        double randomZumbiNumber, randomSoldadoNumber;
-        randomZumbiNumber = Math.random() * 4;
-        randomSoldadoNumber = Math.random() * 4;
-        int truncadoZumbi = (int)randomZumbiNumber;
-        int truncadoSoldado = (int)randomSoldadoNumber;
+        Zumbi zumbiRandom = zumbiRandom2();
 
-        Zumbi zumbiRandom = grupo2.get(truncadoZumbi);
-        Soldado jogadorRandom = pelotao.get(truncadoSoldado);
+        Soldado soldadoRandom = soldadoRandom();
 
-        zumbiRandom.bater(jogadorRandom);
-        System.out.println("Zumbi "+zumbiRandom.getClasse()+" bateu em Soldado "+ jogadorRandom.getClasse());
+        if (soldadoRandom.isVivo()) {
+            zumbiRandom.bater(soldadoRandom);
+            System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
+        } else if (!soldadoRandom.isVivo()) {
+            System.out.println("Você deu sorte, o zumbi errou o ataque!");
+        }
     }
 
     public static void rodadaZumbi3() {
-        double randomZumbiNumber, randomSoldadoNumber;
-        randomZumbiNumber = Math.random() * 4;
-        randomSoldadoNumber = Math.random() * 4;
-        int truncadoZumbi = (int)randomZumbiNumber;
-        int truncadoSoldado = (int)randomSoldadoNumber;
+        Zumbi zumbiRandom = zumbiRandom3();
 
-        Zumbi zumbiRandom = grupo3.get(truncadoZumbi);
-        Soldado jogadorRandom = pelotao.get(truncadoSoldado);
+        Soldado soldadoRandom = soldadoRandom();
 
-        zumbiRandom.bater(jogadorRandom);
-        System.out.println("Zumbi "+zumbiRandom.getClasse()+" bateu em Soldado "+ jogadorRandom.getClasse());
+        if (soldadoRandom.isVivo()) {
+            zumbiRandom.bater(soldadoRandom);
+            System.out.println("Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse());
+        } else if (!soldadoRandom.isVivo()) {
+            System.out.println("Você deu sorte, o zumbi errou o ataque!");
+        }
     }
 
     public static boolean pelotaoVivo() {
