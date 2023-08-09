@@ -1,10 +1,9 @@
-package Pelotao;
+package Personagens.Pelotao;
 
-import Zumbis.Zumbi;
+import Personagens.Personagem;
+import Personagens.Zumbis.Zumbi;
 
-import java.util.ArrayList;
-
-public abstract class Soldado {
+public abstract class Soldado extends Personagem {
     private String classe;
     private int vida;
     private int dano;
@@ -22,7 +21,16 @@ public abstract class Soldado {
         this.skillBoolean = skillBoolean;
     }
 
-    public abstract void atirar(Soldado atirador, Zumbi alvo);
+    public void atirar(Soldado atirador, Zumbi alvo) {
+        if(alvo.isVivo()) {
+            int danoAtirador = atirador.getDano();
+            int vidaAlvo = alvo.getVida();
+
+            alvo.setVida(vidaAlvo - danoAtirador);
+        }
+    }
+
+    public abstract void skill(Personagem alvo);
 
     public int getVida() {
         return vida;

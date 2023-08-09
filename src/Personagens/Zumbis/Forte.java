@@ -1,9 +1,9 @@
-package Zumbis;
+package Personagens.Zumbis;
 
-import Pelotao.Soldado;
+import Personagens.Pelotao.Soldado;
 
-public class Normal extends Zumbi{
-    public Normal (String classe, int vida, int dano, boolean vivo) {
+public class Forte extends Zumbi{
+    public Forte (String classe, int vida, int dano, boolean vivo) {
         super(classe,vida,dano,vivo);
     }
 

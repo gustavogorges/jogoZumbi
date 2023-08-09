@@ -1,13 +1,14 @@
-import Pelotao.*;
-import Zumbis.Forte;
-import Zumbis.Fraco;
-import Zumbis.Normal;
-import Zumbis.Zumbi;
+import Personagens.Pelotao.*;
+import Personagens.Personagem;
+import Personagens.Zumbis.Forte;
+import Personagens.Zumbis.Fraco;
+import Personagens.Zumbis.Normal;
+import Personagens.Zumbis.Zumbi;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Fases {
+public class Fases { // fazer um objeto fase e passar todos os souts para o main
     static Scanner sc = new Scanner(System.in);
     static ArrayList<Zumbi> grupo1 = new ArrayList<>();
     static ArrayList<Zumbi> grupo2 = new ArrayList<>();
@@ -21,7 +22,15 @@ public class Fases {
     static int faseAtual;
 
     public static void fase1()  {
-        Pelotao.novoPelotao();
+        Soldado assalto = new Assalto("assalto",100,45,70,true,true);
+        pelotao.add(assalto);
+        Soldado suporte = new Suporte("suporte",110,25,1,true,true);
+        pelotao.add(suporte);
+        Soldado medico = new Medico("medico",90,30,60,true,true);
+        pelotao.add(medico);
+        Soldado batedor = new Batedor("batedor",90,100,999,true,true);
+        pelotao.add(batedor);
+
         Zumbi zumbiFraco11 = new Fraco("fraco",50,20,true);
         grupo1.add(zumbiFraco11);
         Zumbi zumbiFraco12 = new Fraco("fraco",50,20,true);
@@ -74,16 +83,10 @@ public class Fases {
     }
 
     public static void fase3()  {
-        Zumbi zumbiForte31 = new Forte("forte",150,60,true);
-        grupo3.add(zumbiForte31);
-        Zumbi zumbiForte32 = new Forte("forte",150,60,true);
-        grupo3.add(zumbiForte32);
-        Zumbi zumbiForte33 = new Forte("forte",150,60,true);
-        grupo3.add(zumbiForte33);
-        Zumbi zumbiForte34 = new Forte("forte",150,60,true);
-        grupo3.add(zumbiForte34);
-        Zumbi zumbiForte35 = new Forte("forte",150,60,true);
-        grupo3.add(zumbiForte35);
+
+        for (int i = 0; i < 5; i++) {
+            grupo3.add(new Forte("forte", 150, 60, true));
+        }
 
         do {
             statusPelotao();
@@ -258,5 +261,68 @@ public class Fases {
             }
         }
         return false;
+    }
+
+    public static Personagem alvoZumbi(int faseAtual) {
+        if (faseAtual == 1) {
+            int cont = 1;
+            System.out.println("Digite qual seu alvo: ");
+            for (Zumbi zumbiFor: Fases.grupo1) {
+                if(zumbiFor.isVivo()) {
+                    System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - vida : " + zumbiFor.getVida());
+                    cont++;
+                } else {
+                    System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - ZUMBI MORTO ");
+                    cont++;
+                }
+            }
+            int escolha = sc.nextInt();
+
+            return Fases.grupo1.get(escolha - 1);
+        }
+        else if(faseAtual == 2) {
+            int cont = 1;
+            System.out.println("Digite qual seu alvo: ");
+            for (Zumbi zumbiFor: Fases.grupo2) {
+                if(zumbiFor.isVivo()) {
+                    System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - vida : " + zumbiFor.getVida());
+                    cont++;
+                } else {
+                    System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - ZUMBI MORTO ");
+                    cont++;
+                }
+            }
+            int escolha = sc.nextInt();
+
+            return Fases.grupo2.get(escolha - 1);
+        } else if(faseAtual == 3) {
+            int cont = 1;
+            System.out.println("Digite qual seu alvo: ");
+            for (Zumbi zumbiFor: Fases.grupo3) {
+                if(zumbiFor.isVivo()) {
+                    System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - vida : " + zumbiFor.getVida());
+                    cont++;
+                } else {
+                    System.out.println(cont + "\n - classe : " + zumbiFor.getClasse() + "\n - ZUMBI MORTO ");
+                    cont++;
+                }
+            }
+            int escolha = sc.nextInt();
+
+            return Fases.grupo3.get(escolha - 1);
+        }
+        return null;
+    }
+
+    public static Personagem alvoSoldado() {
+        int cont = 1;
+        System.out.println("Digite qual seu alvo: ");
+        for (Soldado soldadoFor : Fases.pelotao) {
+            System.out.println(cont+"\n - classe : "+soldadoFor.getClasse()+"\n - vida : "+ soldadoFor.getVida());
+            cont++;
+        }
+        int escolha = sc.nextInt();
+
+        return Fases.pelotao.get(escolha - 1);
     }
 }

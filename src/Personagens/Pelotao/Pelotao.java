@@ -1,4 +1,4 @@
-package Pelotao;
+package Personagens.Pelotao;
 
 import java.util.ArrayList;
 

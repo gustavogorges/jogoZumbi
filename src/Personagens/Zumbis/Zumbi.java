@@ -1,8 +1,9 @@
-package Zumbis;
+package Personagens.Zumbis;
 
-import Pelotao.Soldado;
+import Personagens.Pelotao.Soldado;
+import Personagens.Personagem;
 
-public abstract class Zumbi {
+public abstract class Zumbi extends Personagem{
     private String classe;
     private int vida;
     private int dano;
