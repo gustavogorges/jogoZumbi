@@ -5,8 +5,8 @@ import Personagens.Zumbis.Zumbi;
 
 public class Medico extends Soldado {
 
-    public Medico(String classe, int vida, int dano, int skill, boolean vivo, boolean skillBoolean) {
-        super(classe,vida,dano,skill,vivo, skillBoolean);
+    public Medico() {
+        super("medico",90,30,60);
     }
 
 

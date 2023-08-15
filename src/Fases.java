@@ -9,43 +9,56 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Fases { // fazer um objeto fase e passar todos os souts para o main
-    static Scanner sc = new Scanner(System.in);
+    private ArrayList<Zumbi> grupoZumbis = new ArrayList<>();
+    private Jogador jogador;
+    Fases(int faseAtual) {
 
-    public static Zumbi zumbiRandom1(ArrayList<Zumbi> grupo1) {
-        double randomZumbiNumber = Math.random() * grupo1.size();
-        int truncadoZumbi = (int)randomZumbiNumber;
+        int fraco = 0, normal = 0, forte = 0;
 
-        return grupo1.get(truncadoZumbi);
+        if(faseAtual == 1) {
+            fraco = 3;
+            normal = 2;
+        }
+
+        else if(faseAtual == 2) {
+            normal = 2;
+            forte = 3;
+        }
+
+        else if(faseAtual == 3) {
+            forte = 5;
+        }
+
+        for (int i = 0; i < fraco; i++) {
+            grupoZumbis.add(new Fraco("fraco", 50, 20, true));
+        }
+        for (int i = 0; i < normal; i++) {
+            grupoZumbis.add(new Normal("normal", 80, 50, true));
+        }
+        for (int i = 0; i < forte; i++) {
+            grupoZumbis.add(new Forte("forte", 150, 60, true));
+        }
     }
 
-    public static Zumbi zumbiRandom2(ArrayList<Zumbi> grupo2) {
-        double randomZumbiNumber;
-        randomZumbiNumber = Math.random() * grupo2.size();
+    public Zumbi zumbiRandom() {
+        double randomZumbiNumber = Math.random() * grupoZumbis.size();
         int truncadoZumbi = (int)randomZumbiNumber;
 
-        return grupo2.get(truncadoZumbi);
+        return grupoZumbis.get(truncadoZumbi);
     }
 
-    public static Zumbi zumbiRandom3(ArrayList<Zumbi> grupo3) {
-        double randomZumbiNumber;
-        randomZumbiNumber = Math.random() * grupo3.size();
-        int truncadoZumbi = (int)randomZumbiNumber;
-
-        return grupo3.get(truncadoZumbi);
-    }
-
-    public static Soldado soldadoRandom(ArrayList<Soldado> pelotao) {
+    public Personagem soldadoRandom() {
         double randomSoldadoNumber;
-        randomSoldadoNumber = Math.random() * pelotao.size();
+        randomSoldadoNumber = Math.random() * jogador.getPelotao().size();
         int truncadoSoldado = (int)randomSoldadoNumber;
 
-        return pelotao.get(truncadoSoldado);
+        return jogador.getPelotao().get(truncadoSoldado);
     }
 
 
 
-    public static boolean pelotaoVivo(ArrayList<Soldado> pelotao) {
-        for (Soldado soldadoFor : pelotao) {
+    public boolean pelotaoVivo() {
+        for (Personagem soldadoFor : jogador.getPelotao()) {
             if(soldadoFor.isVivo()){
                 return true;
             }
@@ -53,8 +66,8 @@ public class Fases { // fazer um objeto fase e passar todos os souts para o main
         return false;
     }
 
-    public static boolean zumbisVivo1(ArrayList<Zumbi> grupo1) {
-        for (Zumbi zumbiFor : grupo1) {
+    public boolean zumbisVivo() {
+        for (Zumbi zumbiFor : grupoZumbis) {
             if(zumbiFor.isVivo()){
                 return true;
             }
@@ -62,25 +75,21 @@ public class Fases { // fazer um objeto fase e passar todos os souts para o main
         return false;
     }
 
-    public static boolean zumbisVivo2(ArrayList<Zumbi> grupo2) {
-        for (Zumbi zumbiFor : grupo2) {
-            if(zumbiFor.isVivo()){
-                return true;
-            }
-        }
-        return false;
+    public String rodadaZumbi() {
+        // ZUMBI ALEATÓRIO
+        Zumbi zumbiRandom = zumbiRandom();
+
+        Soldado soldadoRandom = (Soldado) soldadoRandom();
+
+        zumbiRandom.bater(soldadoRandom);
+        return "Zumbi " + zumbiRandom.getClasse() + " bateu em Soldado " + soldadoRandom.getClasse();
     }
 
-    public static boolean zumbisVivo3(ArrayList<Zumbi> grupo3) {
-        for (Zumbi zumbiFor : grupo3) {
-            if(zumbiFor.isVivo()){
-                return true;
-            }
-        }
-        return false;
+    public ArrayList<Zumbi> getGrupoZumbis() {
+        return grupoZumbis;
     }
 
-
-
-
+    public Jogador getJogador() {
+        return jogador;
+    }
 }
